@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var stocksVM = StocksViewModel(range: .fiveYears)
+    @StateObject private var stocksVM = StocksViewModel(range: .twoYears)
     @State private var showingSheet = false
     var body: some View {
         NavigationStack {

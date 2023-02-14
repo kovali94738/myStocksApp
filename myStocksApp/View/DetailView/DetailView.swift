@@ -28,42 +28,60 @@ struct DetailView: View {
         return String(format: "%.2f", i)
     }
     
+    var maxPrice: String {
+        let i = stock.closes.max()!.formatted()
+        return i
+    }
+    
+    var minPrice: String {
+        let i = stock.closes.min()!.formatted()
+        return i
+    }
+    
     var body: some View {
-        VStack {
-            HStack {
-                VStack(alignment: .leading, spacing: 15) {
-                    Text(stock.companyName)
-                        .bold()
-                        .font(.largeTitle)
-                        .lineLimit(1)
-                    Text(stock.symbol)
-                    Divider()
-                }
-                Spacer()
-                VStack(alignment: .center, spacing: 15) {
-                    Text("$\(stock.latestPrice.formatted())")
-                }
-                .padding(.trailing)
+        GeometryReader { geo in
+            VStack {
+                HStack {
+                    VStack(alignment: .leading, spacing: 15) {
+                        Text(stock.companyName)
+                            .bold()
+                            .font(.headline)
+                            
+                        Text(stock.symbol)
+                    }
+                    Spacer()
+                    VStack(alignment: .center, spacing: 15) {
+                        Text("$\(stock.latestPrice.formatted())")
+                    }
+                    .padding(.trailing)
 
-            }
-            Spacer()
-            GeometryReader { geo in
+                }
+                
+                Divider()
+                
+                Spacer()
+
+                Text("Разница в цене за \(stock.currentRange.rawValue): $\(priceDifference) или \(percentageDifference)%")
+                    .padding(.vertical)
                 ScrollView {
+                    
                     ZStack {
                         RoundedRectangle(cornerRadius: 30)
+
                             .fill(.ultraThinMaterial)
                         LineChart(data: stock.candles.normalizedValues)
                             .stroke(isGreen ? Color.green : Color.red, lineWidth: 2)
                             .padding()
                     }
-                        .frame(width: geo.size.width * 0.99, height: geo.size.height * 0.85)
-                    .frame(width: geo.size.width, height: geo.size.height)
-                    
-                    Text("Разница в цене за \(stock.currentRange.rawValue): $\(priceDifference) или \(percentageDifference)%")
+                    .frame(width: geo.size.width * 0.95, height: geo.size.height * 0.5)
+                    Text("Максимальная цена за \(stock.currentRange.rawValue): $\(maxPrice)")
+                        .padding(.vertical)
+                    Text("Минимальная цена за \(stock.currentRange.rawValue): $\(minPrice)")
                     
                 }
+                .frame(width: geo.size.width)
+                Spacer()
             }
-            Spacer()
         }
     }
 }
