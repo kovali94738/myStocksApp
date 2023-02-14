@@ -42,7 +42,6 @@ struct DetailView: View {
                 Spacer()
                 VStack(alignment: .center, spacing: 15) {
                     Text("$\(stock.latestPrice.formatted())")
-                    //Text("Разница в цене за промежуток времени: $\(priceDifference) или \(percentageDifference)%")
                 }
                 .padding(.trailing)
 

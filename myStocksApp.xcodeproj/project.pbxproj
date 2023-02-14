@@ -137,8 +137,8 @@
 		3F1D5B14299A56E500AE2924 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3F78E605299A994300C663FE /* DetailView */,
 				3F1D5B19299A6E1F00AE2924 /* MainView */,
+				3F78E605299A994300C663FE /* DetailView */,
 				3F1D5B1E299A785900AE2924 /* SearchTickersView */,
 			);
 			path = View;
