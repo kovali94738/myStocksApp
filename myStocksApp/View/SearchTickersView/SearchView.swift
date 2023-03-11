@@ -11,6 +11,7 @@ struct SearchView: View {
     @StateObject var tickerVM = TickerViewModel()
     @ObservedObject var stocksVM: StocksViewModel
     
+    
     @State private var searchTickerText = ""
     
     let layout = [GridItem(.adaptive(minimum: 200))]
